@@ -1,0 +1,123 @@
+- requirement
+  - ticker-management
+    - descritpion: 티커 관리를 수행하는 API 목록
+    - apis:
+      - add-ticker
+        - description: 티커 추가
+        - input
+          - ticker: 티커 코드
+          - name: 티커 이름
+          - description: 티커 설명
+          - createdAt: 생성일 서버에서 자동으로 생성된다. 
+          - modifiedAt: 티커 수정일로 createdAt과 동일하다. 
+        - output
+          - ticker: 티커 코드
+          - name: 티커 이름
+          - description: 티커 설명
+          - createdAt: 생성일 서버에서 자동으로 생성된다. 
+          - modifiedAt: 티커 수정일로 createdAt과 동일하다. 
+      - delete-ticker
+        - description: 티커 삭제
+        - input
+          - ticker: 티커 코드
+        - output
+          - result: 결과로 성공/실패 (True/False)
+      - update-ticker
+        - description: 티커 수정
+        - input
+          - ticker: 티커 코드
+          - name: 티커 이름
+          - description: 티커 설명
+          - createdAt: 생성일 서버에서 자동으로 생성된다. 
+          - modifiedAt: 티커 수정일로 createdAt과 동일하다. 
+        - output
+          - result: 결과로 성공/실패 (True/False)
+        - output
+          - ticker: 티커 코드
+          - name: 티커 이름
+          - description: 티커 설명
+          - createdAt: 생성일 서버에서 자동으로 생성된다. 
+          - modifiedAt: 티커 수정일로 createdAt과 동일하다. 
+      - get-ticker
+        - description: 티커 조회
+        - input
+          - ticker: 티커 코드
+        - output
+          - ticker: 티커 코드
+          - name: 티커 이름
+          - description: 티커 설명
+          - createdAt: 생성일 서버에서 자동으로 생성된다. 
+          - modifiedAt: 티커 수정일로 createdAt과 동일하다. 
+      - get-tickers
+        - description: 티커 목록 조회
+        - input
+        - output
+          - tickers: 티커 목록
+          - result: 각 ticker의 리스트로 반환해줘 
+  - indicator-management
+    - description: 인디케이터를 관리한다. (MACD, RSI, ...)
+    - apis:
+      - add-indicator
+        - description: 인디케이터 추가
+        - input
+          - indicatorName: 인디케이터 이름
+          - indicatorCode: 인디케이터 코드
+          - description: 인디케이터 설명
+          - createdAt: 생성일 서버에서 자동으로 생성된다. 
+          - modifiedAt: 인디케이터 수정일로 createdAt과 동일하다. 
+        - output
+          - indicatorName: 인디케이터 이름
+          - indicatorCode: 인디케이터 코드
+          - description: 인디케이터 설명
+          - createdAt: 생성일 서버에서 자동으로 생성된다. 
+          - modifiedAt: 인디케이터 수정일로 createdAt과 동일하다. 
+    - delete-indicator
+      - description: 인디케이터 삭제
+      - input
+        - indicatorCode: 인디케이터 코드
+      - output
+        - result: 결과로 성공/실패 (True/False)
+    - update-indicator
+      - description: 인디케이터 수정
+      - input
+        - indicatorCode: 인디케이터 코드
+        - indicatorName: 인디케이터 이름
+        - description: 인디케이터 설명
+        - createdAt: 생성일 서버에서 자동으로 생성된다. 
+        - modifiedAt: 인디케이터 수정일로 createdAt과 동일하다. 
+      - output
+        - result: 결과로 성공/실패 (True/False)
+        - indicatorName: 인디케이터 이름
+        - indicatorCode: 인디케이터 코드
+        - description: 인디케이터 설명
+        - createdAt: 생성일 서버에서 자동으로 생성된다. 
+        - modifiedAt: 인디케이터 수정일로 createdAt과 동일하다. 
+    - get-indicator
+      - description: 인디케이터 조회
+      - input
+        - indicatorCode: 인디케이터 코드
+      - output
+        - indicatorName: 인디케이터 이름
+        - indicatorCode: 인디케이터 코드
+        - description: 인디케이터 설명
+        - createdAt: 생성일 서버에서 자동으로 생성된다. 
+        - modifiedAt: 인디케이터 수정일로 createdAt과 동일하다. 
+    - get-indicators
+      - description: 인디케이터 목록 조회
+      - input
+      - output
+        - indicators: 인디케이터 목록
+        - result: 각 indicator의 리스트로 반환해줘 
+  - indicator-calculation
+    - calculate-indicator
+      - description: 인디케이터 계산
+      - input
+        - indicatorCode: 인디케이터 코드
+        - ticker: 티커 코드
+        - date: 계산일
+      - output
+        - result: 결과로 성공/실패 (True/False)
+        - indicatorName: 인디케이터 이름
+        - indicatorCode: 인디케이터 코드
+        - createdAt: 생성일 서버에서 자동으로 생성된다. 
+        - modifiedAt: 인디케이터 수정일로 createdAt과 동일하다. 
