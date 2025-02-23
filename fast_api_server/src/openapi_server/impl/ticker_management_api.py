@@ -4,7 +4,7 @@ from openapi_server.apis.ticker_management_api_base import BaseTickerManagementA
 from openapi_server.models.ticker_output import TickerOutput
 from openapi_server.models.ticker_input import TickerInput 
 from fastapi import HTTPException
-from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime
+from sqlalchemy import Engine, create_engine, Column, Integer, String, Text, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from datetime import datetime
@@ -27,7 +27,7 @@ class TickerManagementApi(BaseTickerManagementApi):
         ticker: str
     ) -> TickerOutput:
         """지정된 티커를 삭제합니다."""
-        engine = create_engine('mysql+pymysql://stock_user:stock1234@localhost/stock_indicator_db')
+        engine: Engine = create_engine('mysql+pymysql://stock_user:stock1234@localhost/stock_indicator_db')
         Base.metadata.create_all(engine)
         Session = sessionmaker(bind=engine)
         session = Session()
@@ -102,6 +102,7 @@ class TickerManagementApi(BaseTickerManagementApi):
             existing_ticker.name = ticker_input.name
             existing_ticker.description = ticker_input.description
             session.commit()
+            session.refresh(existing_ticker)  # 인스턴스를 새로 고침하여 세션에 바인딩
             session.close()
             return TickerOutput(tickerId=existing_ticker.id, ticker=ticker_input.ticker, name=ticker_input.name, description=ticker_input.description)
         else:
