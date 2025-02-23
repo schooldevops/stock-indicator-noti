@@ -24,50 +24,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                ticker:
-                  type: string
-                  example: "AAPL"
-                name:
-                  type: string
-                  example: "Apple Inc."
-                description:
-                  type: string
-                  example: "Apple Inc. 주식"
-                createdAt:
-                  type: string
-                  format: date-time
-                  example: "2023-01-01T00:00:00Z"
-                modifiedAt:
-                  type: string
-                  format: date-time
-                  example: "2023-01-01T00:00:00Z"
+              $ref: '#/components/schemas/TickerInput'
       responses:
         '200':
           description: 성공적으로 티커가 추가되었습니다.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  ticker:
-                    type: string
-                    example: "AAPL"
-                  name:
-                    type: string
-                    example: "Apple Inc."
-                  description:
-                    type: string
-                    example: "Apple Inc. 주식"
-                  createdAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
-                  modifiedAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
+                $ref: '#/components/schemas/TickerOutput'
 
     delete:
       tags:
@@ -104,53 +68,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                ticker:
-                  type: string
-                  example: "AAPL"
-                name:
-                  type: string
-                  example: "Apple Inc."
-                description:
-                  type: string
-                  example: "Apple Inc. 주식"
-                createdAt:
-                  type: string
-                  format: date-time
-                  example: "2023-01-01T00:00:00Z"
-                modifiedAt:
-                  type: string
-                  format: date-time
-                  example: "2023-01-01T00:00:00Z"
+              $ref: '#/components/schemas/TickerInput'
       responses:
         '200':
           description: 성공적으로 티커가 수정되었습니다.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  result:
-                    type: boolean
-                    example: true
-                  ticker:
-                    type: string
-                    example: "AAPL"
-                  name:
-                    type: string
-                    example: "Apple Inc."
-                  description:
-                    type: string
-                    example: "Apple Inc. 주식"
-                  createdAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
-                  modifiedAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
+                $ref: '#/components/schemas/TickerOutput'
 
     get:
       tags:
@@ -171,26 +96,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  ticker:
-                    type: string
-                    example: "AAPL"
-                  name:
-                    type: string
-                    example: "Apple Inc."
-                  description:
-                    type: string
-                    example: "Apple Inc. 주식"
-                  createdAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
-                  modifiedAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
+                $ref: '#/components/schemas/TickerOutput'
 
+  /tickers/list:
     get:
       tags:
         - Ticker Management
@@ -207,20 +115,7 @@ paths:
                   tickers:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        ticker:
-                          type: string
-                          example: "AAPL"
-                        name:
-                          type: string
-                          example: "Apple Inc."
-                        description:
-                          type: string
-                          example: "Apple Inc. 주식"
-                  result:
-                    type: string
-                    example: "각 ticker의 리스트로 반환해줘"
+                      $ref: '#/components/schemas/TickerOutput'
 
   /indicators:
     post:
@@ -233,50 +128,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                indicatorName:
-                  type: string
-                  example: "MACD"
-                indicatorCode:
-                  type: string
-                  example: "MACD"
-                description:
-                  type: string
-                  example: "이동 평균 수렴 발산"
-                createdAt:
-                  type: string
-                  format: date-time
-                  example: "2023-01-01T00:00:00Z"
-                modifiedAt:
-                  type: string
-                  format: date-time
-                  example: "2023-01-01T00:00:00Z"
+              $ref: '#/components/schemas/IndicatorInput'
       responses:
         '200':
           description: 성공적으로 인디케이터가 추가되었습니다.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  indicatorName:
-                    type: string
-                    example: "MACD"
-                  indicatorCode:
-                    type: string
-                    example: "MACD"
-                  description:
-                    type: string
-                    example: "이동 평균 수렴 발산"
-                  createdAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
-                  modifiedAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
+                $ref: '#/components/schemas/IndicatorOutput'
 
     delete:
       tags:
@@ -313,53 +172,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                indicatorCode:
-                  type: string
-                  example: "MACD"
-                indicatorName:
-                  type: string
-                  example: "MACD"
-                description:
-                  type: string
-                  example: "이동 평균 수렴 발산"
-                createdAt:
-                  type: string
-                  format: date-time
-                  example: "2023-01-01T00:00:00Z"
-                modifiedAt:
-                  type: string
-                  format: date-time
-                  example: "2023-01-01T00:00:00Z"
+              $ref: '#/components/schemas/IndicatorInput'
       responses:
         '200':
           description: 성공적으로 인디케이터가 수정되었습니다.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  result:
-                    type: boolean
-                    example: true
-                  indicatorName:
-                    type: string
-                    example: "MACD"
-                  indicatorCode:
-                    type: string
-                    example: "MACD"
-                  description:
-                    type: string
-                    example: "이동 평균 수렴 발산"
-                  createdAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
-                  modifiedAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
+                $ref: '#/components/schemas/IndicatorOutput'
 
     get:
       tags:
@@ -380,26 +200,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  indicatorName:
-                    type: string
-                    example: "MACD"
-                  indicatorCode:
-                    type: string
-                    example: "MACD"
-                  description:
-                    type: string
-                    example: "이동 평균 수렴 발산"
-                  createdAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
-                  modifiedAt:
-                    type: string
-                    format: date-time
-                    example: "2023-01-01T00:00:00Z"
+                $ref: '#/components/schemas/IndicatorOutput'
 
+  /indicators/list:
     get:
       tags:
         - Indicator Management
@@ -416,20 +219,7 @@ paths:
                   indicators:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        indicatorName:
-                          type: string
-                          example: "MACD"
-                        indicatorCode:
-                          type: string
-                          example: "MACD"
-                        description:
-                          type: string
-                          example: "이동 평균 수렴 발산"
-                  result:
-                    type: string
-                    example: "각 indicator의 리스트로 반환해줘"
+                      $ref: '#/components/schemas/IndicatorOutput'
 
   /calculate-indicator:
     post:
@@ -478,4 +268,93 @@ paths:
                   modifiedAt:
                     type: string
                     format: date-time
-                    example: "2023-01-01T00:00:00Z" 
+                    example: "2023-01-01T00:00:00Z"
+
+components:
+  schemas:
+    TickerInput:
+      type: object
+      properties:
+        ticker:
+          type: string
+          example: "AAPL"
+        name:
+          type: string
+          example: "Apple Inc."
+        description:
+          type: string
+          example: "Apple Inc. 주식"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        modifiedAt:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+
+    TickerOutput:
+      type: object
+      properties:
+        ticker:
+          type: string
+          example: "AAPL"
+        tickerId:
+          type: string
+          example: "1234567890"
+        name:
+          type: string
+          example: "Apple Inc."
+        description:
+          type: string
+          example: "Apple Inc. 주식"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        modifiedAt:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+
+    IndicatorInput:
+      type: object
+      properties:
+        indicatorName:
+          type: string
+          example: "MACD"
+        indicatorCode:
+          type: string
+          example: "MACD"
+        description:
+          type: string
+          example: "이동 평균 수렴 발산"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        modifiedAt:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+
+    IndicatorOutput:
+      type: object
+      properties:
+        indicatorName:
+          type: string
+          example: "MACD"
+        indicatorCode:
+          type: string
+          example: "MACD"
+        description:
+          type: string
+          example: "이동 평균 수렴 발산"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        modifiedAt:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"

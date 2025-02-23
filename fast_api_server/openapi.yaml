@@ -1,0 +1,460 @@
+openapi: 3.0.0
+info:
+  description: 티커 및 인디케이터를 관리하는 API입니다.
+  title: 티커 및 인디케이터 관리 API
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: 티커 관리 관련 API
+  name: Ticker Management
+- description: 인디케이터 관리 관련 API
+  name: Indicator Management
+- description: 인디케이터 계산 관련 API
+  name: Indicator Calculation
+paths:
+  /tickers:
+    delete:
+      description: 지정된 티커를 삭제합니다.
+      parameters:
+      - description: 삭제할 티커 코드
+        explode: true
+        in: query
+        name: ticker
+        required: true
+        schema:
+          example: AAPL
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_tickers_delete_200_response'
+          description: 성공적으로 티커가 삭제되었습니다.
+      summary: 티커 삭제
+      tags:
+      - Ticker Management
+    get:
+      description: 지정된 티커 정보를 조회합니다.
+      parameters:
+      - description: 조회할 티커 코드
+        explode: true
+        in: query
+        name: ticker
+        required: true
+        schema:
+          example: AAPL
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TickerOutput'
+          description: 성공적으로 티커 정보를 조회했습니다.
+      summary: 티커 조회
+      tags:
+      - Ticker Management
+    post:
+      description: 새로운 티커를 추가합니다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TickerInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TickerOutput'
+          description: 성공적으로 티커가 추가되었습니다.
+      summary: 티커 추가
+      tags:
+      - Ticker Management
+    put:
+      description: 기존 티커 정보를 수정합니다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TickerInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TickerOutput'
+          description: 성공적으로 티커가 수정되었습니다.
+      summary: 티커 수정
+      tags:
+      - Ticker Management
+  /tickers/list:
+    get:
+      description: 모든 티커 목록을 조회합니다.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_tickers_list_get_200_response'
+          description: 성공적으로 티커 목록을 조회했습니다.
+      summary: 티커 목록 조회
+      tags:
+      - Ticker Management
+  /indicators:
+    delete:
+      description: 지정된 인디케이터를 삭제합니다.
+      parameters:
+      - description: 삭제할 인디케이터 코드
+        explode: true
+        in: query
+        name: indicatorCode
+        required: true
+        schema:
+          example: MACD
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_tickers_delete_200_response'
+          description: 성공적으로 인디케이터가 삭제되었습니다.
+      summary: 인디케이터 삭제
+      tags:
+      - Indicator Management
+    get:
+      description: 지정된 인디케이터 정보를 조회합니다.
+      parameters:
+      - description: 조회할 인디케이터 코드
+        explode: true
+        in: query
+        name: indicatorCode
+        required: true
+        schema:
+          example: MACD
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndicatorOutput'
+          description: 성공적으로 인디케이터 정보를 조회했습니다.
+      summary: 인디케이터 조회
+      tags:
+      - Indicator Management
+    post:
+      description: 새로운 인디케이터를 추가합니다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndicatorInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndicatorOutput'
+          description: 성공적으로 인디케이터가 추가되었습니다.
+      summary: 인디케이터 추가
+      tags:
+      - Indicator Management
+    put:
+      description: 기존 인디케이터 정보를 수정합니다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndicatorInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndicatorOutput'
+          description: 성공적으로 인디케이터가 수정되었습니다.
+      summary: 인디케이터 수정
+      tags:
+      - Indicator Management
+  /indicators/list:
+    get:
+      description: 모든 인디케이터 목록을 조회합니다.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_indicators_list_get_200_response'
+          description: 성공적으로 인디케이터 목록을 조회했습니다.
+      summary: 인디케이터 목록 조회
+      tags:
+      - Indicator Management
+  /calculate-indicator:
+    post:
+      description: 지정된 인디케이터를 계산합니다.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_calculate_indicator_post_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_calculate_indicator_post_200_response'
+          description: 성공적으로 인디케이터가 계산되었습니다.
+      summary: 인디케이터 계산
+      tags:
+      - Indicator Calculation
+components:
+  schemas:
+    TickerInput:
+      example:
+        createdAt: 2023-01-01T00:00:00Z
+        ticker: AAPL
+        modifiedAt: 2023-01-01T00:00:00Z
+        name: Apple Inc.
+        description: Apple Inc. 주식
+      properties:
+        ticker:
+          example: AAPL
+          title: ticker
+          type: string
+        name:
+          example: Apple Inc.
+          title: name
+          type: string
+        description:
+          example: Apple Inc. 주식
+          title: description
+          type: string
+        createdAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: createdAt
+          type: string
+        modifiedAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: modifiedAt
+          type: string
+      title: TickerInput
+      type: object
+    TickerOutput:
+      example:
+        createdAt: 2023-01-01T00:00:00Z
+        ticker: AAPL
+        modifiedAt: 2023-01-01T00:00:00Z
+        name: Apple Inc.
+        description: Apple Inc. 주식
+        tickerId: "1234567890"
+      properties:
+        ticker:
+          example: AAPL
+          title: ticker
+          type: string
+        tickerId:
+          example: "1234567890"
+          title: tickerId
+          type: string
+        name:
+          example: Apple Inc.
+          title: name
+          type: string
+        description:
+          example: Apple Inc. 주식
+          title: description
+          type: string
+        createdAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: createdAt
+          type: string
+        modifiedAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: modifiedAt
+          type: string
+      title: TickerOutput
+      type: object
+    IndicatorInput:
+      example:
+        createdAt: 2023-01-01T00:00:00Z
+        indicatorName: MACD
+        modifiedAt: 2023-01-01T00:00:00Z
+        indicatorCode: MACD
+        description: 이동 평균 수렴 발산
+      properties:
+        indicatorName:
+          example: MACD
+          title: indicatorName
+          type: string
+        indicatorCode:
+          example: MACD
+          title: indicatorCode
+          type: string
+        description:
+          example: 이동 평균 수렴 발산
+          title: description
+          type: string
+        createdAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: createdAt
+          type: string
+        modifiedAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: modifiedAt
+          type: string
+      title: IndicatorInput
+      type: object
+    IndicatorOutput:
+      example:
+        createdAt: 2023-01-01T00:00:00Z
+        indicatorName: MACD
+        modifiedAt: 2023-01-01T00:00:00Z
+        indicatorCode: MACD
+        description: 이동 평균 수렴 발산
+      properties:
+        indicatorName:
+          example: MACD
+          title: indicatorName
+          type: string
+        indicatorCode:
+          example: MACD
+          title: indicatorCode
+          type: string
+        description:
+          example: 이동 평균 수렴 발산
+          title: description
+          type: string
+        createdAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: createdAt
+          type: string
+        modifiedAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: modifiedAt
+          type: string
+      title: IndicatorOutput
+      type: object
+    _tickers_delete_200_response:
+      example:
+        result: true
+      properties:
+        result:
+          example: true
+          title: result
+          type: boolean
+      title: _tickers_delete_200_response
+      type: object
+    _tickers_list_get_200_response:
+      example:
+        tickers:
+        - createdAt: 2023-01-01T00:00:00Z
+          ticker: AAPL
+          modifiedAt: 2023-01-01T00:00:00Z
+          name: Apple Inc.
+          description: Apple Inc. 주식
+          tickerId: "1234567890"
+        - createdAt: 2023-01-01T00:00:00Z
+          ticker: AAPL
+          modifiedAt: 2023-01-01T00:00:00Z
+          name: Apple Inc.
+          description: Apple Inc. 주식
+          tickerId: "1234567890"
+      properties:
+        tickers:
+          items:
+            $ref: '#/components/schemas/TickerOutput'
+          title: tickers
+          type: array
+      title: _tickers_list_get_200_response
+      type: object
+    _indicators_list_get_200_response:
+      example:
+        indicators:
+        - createdAt: 2023-01-01T00:00:00Z
+          indicatorName: MACD
+          modifiedAt: 2023-01-01T00:00:00Z
+          indicatorCode: MACD
+          description: 이동 평균 수렴 발산
+        - createdAt: 2023-01-01T00:00:00Z
+          indicatorName: MACD
+          modifiedAt: 2023-01-01T00:00:00Z
+          indicatorCode: MACD
+          description: 이동 평균 수렴 발산
+      properties:
+        indicators:
+          items:
+            $ref: '#/components/schemas/IndicatorOutput'
+          title: indicators
+          type: array
+      title: _indicators_list_get_200_response
+      type: object
+    _calculate_indicator_post_request:
+      properties:
+        indicatorCode:
+          example: MACD
+          title: indicatorCode
+          type: string
+        ticker:
+          example: AAPL
+          title: ticker
+          type: string
+        date:
+          example: 2023-01-01
+          format: date
+          title: date
+          type: string
+      title: _calculate_indicator_post_request
+      type: object
+    _calculate_indicator_post_200_response:
+      example:
+        result: true
+        createdAt: 2023-01-01T00:00:00Z
+        indicatorName: MACD
+        modifiedAt: 2023-01-01T00:00:00Z
+        indicatorCode: MACD
+      properties:
+        result:
+          example: true
+          title: result
+          type: boolean
+        indicatorName:
+          example: MACD
+          title: indicatorName
+          type: string
+        indicatorCode:
+          example: MACD
+          title: indicatorCode
+          type: string
+        createdAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: createdAt
+          type: string
+        modifiedAt:
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          title: modifiedAt
+          type: string
+      title: _calculate_indicator_post_200_response
+      type: object
