@@ -13,6 +13,8 @@
     - SQLAlchemy
     - Pandas
     - yfinance  
+    - sqlalchemy
+    - mysql-connector-python
 - 클라이언트:
     - TailwindCSS 4
     - SvelteKit

@@ -21,7 +21,8 @@
         - input
           - ticker: 티커 코드
         - output
-          - result: 결과로 성공/실패 (True/False)
+          - resultCode: 200,404,500등과 같은 http response code
+          - message: 결과 메시지
       - update-ticker
         - description: 티커 수정
         - input
@@ -31,7 +32,8 @@
           - createdAt: 생성일 서버에서 자동으로 생성된다. 
           - modifiedAt: 티커 수정일로 createdAt과 동일하다. 
         - output
-          - result: 결과로 성공/실패 (True/False)
+          - resultCode: 200,404,500등과 같은 http response code
+          - message: 결과 메시지
         - output
           - ticker: 티커 코드
           - name: 티커 이름
@@ -76,7 +78,8 @@
       - input
         - indicatorCode: 인디케이터 코드
       - output
-        - result: 결과로 성공/실패 (True/False)
+        - resultCode: 200,404,500등과 같은 http response code
+        - message: 결과 메시지
     - update-indicator
       - description: 인디케이터 수정
       - input
@@ -86,7 +89,8 @@
         - createdAt: 생성일 서버에서 자동으로 생성된다. 
         - modifiedAt: 인디케이터 수정일로 createdAt과 동일하다. 
       - output
-        - result: 결과로 성공/실패 (True/False)
+        - resultCode: 200,404,500등과 같은 http response code
+        - message: 결과 메시지
         - indicatorName: 인디케이터 이름
         - indicatorCode: 인디케이터 코드
         - description: 인디케이터 설명
@@ -116,7 +120,8 @@
         - ticker: 티커 코드
         - date: 계산일
       - output
-        - result: 결과로 성공/실패 (True/False)
+        - resultCode: 200,404,500등과 같은 http response code
+        - message: 결과 메시지
         - indicatorName: 인디케이터 이름
         - indicatorCode: 인디케이터 코드
         - createdAt: 생성일 서버에서 자동으로 생성된다. 

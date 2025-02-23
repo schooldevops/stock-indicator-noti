@@ -21,7 +21,7 @@ import json
 
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 try:
     from typing import Self
@@ -33,7 +33,7 @@ class TickerOutput(BaseModel):
     TickerOutput
     """ # noqa: E501
     ticker: Optional[StrictStr] = None
-    ticker_id: Optional[StrictStr] = Field(default=None, alias="tickerId")
+    ticker_id: Optional[StrictInt] = Field(default=None, alias="tickerId")
     name: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")

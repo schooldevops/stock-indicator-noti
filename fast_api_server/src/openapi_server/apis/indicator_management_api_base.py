@@ -3,11 +3,10 @@
 from typing import ClassVar, Dict, List, Tuple  # noqa: F401
 
 from pydantic import Field, StrictStr
+from typing import List
 from typing_extensions import Annotated
 from openapi_server.models.indicator_input import IndicatorInput
 from openapi_server.models.indicator_output import IndicatorOutput
-from openapi_server.models.indicators_list_get200_response import IndicatorsListGet200Response
-from openapi_server.models.tickers_delete200_response import TickersDelete200Response
 
 
 class BaseIndicatorManagementApi:
@@ -19,7 +18,7 @@ class BaseIndicatorManagementApi:
     async def indicators_delete(
         self,
         indicator_code: Annotated[StrictStr, Field(description="삭제할 인디케이터 코드")],
-    ) -> TickersDelete200Response:
+    ) -> IndicatorOutput:
         """지정된 인디케이터를 삭제합니다."""
         ...
 
@@ -34,7 +33,7 @@ class BaseIndicatorManagementApi:
 
     async def indicators_list_get(
         self,
-    ) -> IndicatorsListGet200Response:
+    ) -> List[IndicatorOutput]:
         """모든 인디케이터 목록을 조회합니다."""
         ...
 

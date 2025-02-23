@@ -3,11 +3,10 @@
 from typing import ClassVar, Dict, List, Tuple  # noqa: F401
 
 from pydantic import Field, StrictStr
+from typing import List
 from typing_extensions import Annotated
 from openapi_server.models.ticker_input import TickerInput
 from openapi_server.models.ticker_output import TickerOutput
-from openapi_server.models.tickers_delete200_response import TickersDelete200Response
-from openapi_server.models.tickers_list_get200_response import TickersListGet200Response
 
 
 class BaseTickerManagementApi:
@@ -19,7 +18,7 @@ class BaseTickerManagementApi:
     async def tickers_delete(
         self,
         ticker: Annotated[StrictStr, Field(description="삭제할 티커 코드")],
-    ) -> TickersDelete200Response:
+    ) -> TickerOutput:
         """지정된 티커를 삭제합니다."""
         ...
 
@@ -34,7 +33,7 @@ class BaseTickerManagementApi:
 
     async def tickers_list_get(
         self,
-    ) -> TickersListGet200Response:
+    ) -> List[TickerOutput]:
         """모든 티커 목록을 조회합니다."""
         ...
 

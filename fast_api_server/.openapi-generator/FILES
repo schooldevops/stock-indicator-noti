@@ -22,10 +22,7 @@ src/openapi_server/models/calculate_indicator_post_request.py
 src/openapi_server/models/extra_models.py
 src/openapi_server/models/indicator_input.py
 src/openapi_server/models/indicator_output.py
-src/openapi_server/models/indicators_list_get200_response.py
 src/openapi_server/models/ticker_input.py
 src/openapi_server/models/ticker_output.py
-src/openapi_server/models/tickers_delete200_response.py
-src/openapi_server/models/tickers_list_get200_response.py
 src/openapi_server/security_api.py
 tests/conftest.py

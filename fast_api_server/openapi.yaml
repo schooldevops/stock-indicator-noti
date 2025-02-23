@@ -31,7 +31,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_tickers_delete_200_response'
+                $ref: '#/components/schemas/TickerOutput'
           description: 성공적으로 티커가 삭제되었습니다.
       summary: 티커 삭제
       tags:
@@ -102,7 +102,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_tickers_list_get_200_response'
+                items:
+                  $ref: '#/components/schemas/TickerOutput'
+                type: array
           description: 성공적으로 티커 목록을 조회했습니다.
       summary: 티커 목록 조회
       tags:
@@ -125,7 +127,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_tickers_delete_200_response'
+                $ref: '#/components/schemas/IndicatorOutput'
           description: 성공적으로 인디케이터가 삭제되었습니다.
       summary: 인디케이터 삭제
       tags:
@@ -196,7 +198,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_indicators_list_get_200_response'
+                items:
+                  $ref: '#/components/schemas/IndicatorOutput'
+                type: array
           description: 성공적으로 인디케이터 목록을 조회했습니다.
       summary: 인디케이터 목록 조회
       tags:
@@ -261,16 +265,16 @@ components:
         modifiedAt: 2023-01-01T00:00:00Z
         name: Apple Inc.
         description: Apple Inc. 주식
-        tickerId: "1234567890"
+        tickerId: 1234567890
       properties:
         ticker:
           example: AAPL
           title: ticker
           type: string
         tickerId:
-          example: "1234567890"
+          example: 1234567890
           title: tickerId
-          type: string
+          type: integer
         name:
           example: Apple Inc.
           title: name
@@ -326,11 +330,16 @@ components:
     IndicatorOutput:
       example:
         createdAt: 2023-01-01T00:00:00Z
+        indicatorId: 1234567890
         indicatorName: MACD
         modifiedAt: 2023-01-01T00:00:00Z
         indicatorCode: MACD
         description: 이동 평균 수렴 발산
       properties:
+        indicatorId:
+          example: 1234567890
+          title: indicatorId
+          type: integer
         indicatorName:
           example: MACD
           title: indicatorName
@@ -354,60 +363,6 @@ components:
           title: modifiedAt
           type: string
       title: IndicatorOutput
-      type: object
-    _tickers_delete_200_response:
-      example:
-        result: true
-      properties:
-        result:
-          example: true
-          title: result
-          type: boolean
-      title: _tickers_delete_200_response
-      type: object
-    _tickers_list_get_200_response:
-      example:
-        tickers:
-        - createdAt: 2023-01-01T00:00:00Z
-          ticker: AAPL
-          modifiedAt: 2023-01-01T00:00:00Z
-          name: Apple Inc.
-          description: Apple Inc. 주식
-          tickerId: "1234567890"
-        - createdAt: 2023-01-01T00:00:00Z
-          ticker: AAPL
-          modifiedAt: 2023-01-01T00:00:00Z
-          name: Apple Inc.
-          description: Apple Inc. 주식
-          tickerId: "1234567890"
-      properties:
-        tickers:
-          items:
-            $ref: '#/components/schemas/TickerOutput'
-          title: tickers
-          type: array
-      title: _tickers_list_get_200_response
-      type: object
-    _indicators_list_get_200_response:
-      example:
-        indicators:
-        - createdAt: 2023-01-01T00:00:00Z
-          indicatorName: MACD
-          modifiedAt: 2023-01-01T00:00:00Z
-          indicatorCode: MACD
-          description: 이동 평균 수렴 발산
-        - createdAt: 2023-01-01T00:00:00Z
-          indicatorName: MACD
-          modifiedAt: 2023-01-01T00:00:00Z
-          indicatorCode: MACD
-          description: 이동 평균 수렴 발산
-      properties:
-        indicators:
-          items:
-            $ref: '#/components/schemas/IndicatorOutput'
-          title: indicators
-          type: array
-      title: _indicators_list_get_200_response
       type: object
     _calculate_indicator_post_request:
       properties:

@@ -52,11 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  result:
-                    type: boolean
-                    example: true
+                $ref: '#/components/schemas/TickerOutput'
 
     put:
       tags:
@@ -110,12 +106,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  tickers:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/TickerOutput'
+                type: array
+                items:
+                  $ref: '#/components/schemas/TickerOutput'
 
   /indicators:
     post:
@@ -156,11 +149,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  result:
-                    type: boolean
-                    example: true
+                $ref: '#/components/schemas/IndicatorOutput'
+
 
     put:
       tags:
@@ -214,12 +204,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  indicators:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/IndicatorOutput'
+                type: array
+                items:
+                  $ref: '#/components/schemas/IndicatorOutput'
 
   /calculate-indicator:
     post:
@@ -300,8 +287,8 @@ components:
           type: string
           example: "AAPL"
         tickerId:
-          type: string
-          example: "1234567890"
+          type: integer
+          example: 1234567890
         name:
           type: string
           example: "Apple Inc."
@@ -341,6 +328,9 @@ components:
     IndicatorOutput:
       type: object
       properties:
+        indicatorId:
+          type: integer
+          example: 1234567890
         indicatorName:
           type: string
           example: "MACD"

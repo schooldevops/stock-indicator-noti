@@ -24,11 +24,10 @@ from fastapi import (  # noqa: F401
 
 from openapi_server.models.extra_models import TokenModel  # noqa: F401
 from pydantic import Field, StrictStr
+from typing import List
 from typing_extensions import Annotated
 from openapi_server.models.ticker_input import TickerInput
 from openapi_server.models.ticker_output import TickerOutput
-from openapi_server.models.tickers_delete200_response import TickersDelete200Response
-from openapi_server.models.tickers_list_get200_response import TickersListGet200Response
 
 
 router = APIRouter()
@@ -41,7 +40,7 @@ for _, name, _ in pkgutil.iter_modules(ns_pkg.__path__, ns_pkg.__name__ + "."):
 @router.delete(
     "/tickers",
     responses={
-        200: {"model": TickersDelete200Response, "description": "성공적으로 티커가 삭제되었습니다."},
+        200: {"model": TickerOutput, "description": "성공적으로 티커가 삭제되었습니다."},
     },
     tags=["Ticker Management"],
     summary="티커 삭제",
@@ -49,7 +48,7 @@ for _, name, _ in pkgutil.iter_modules(ns_pkg.__path__, ns_pkg.__name__ + "."):
 )
 async def tickers_delete(
     ticker: Annotated[StrictStr, Field(description="삭제할 티커 코드")] = Query(None, description="삭제할 티커 코드", alias="ticker"),
-) -> TickersDelete200Response:
+) -> TickerOutput:
     """지정된 티커를 삭제합니다."""
     if not BaseTickerManagementApi.subclasses:
         raise HTTPException(status_code=500, detail="Not implemented")
@@ -77,14 +76,14 @@ async def tickers_get(
 @router.get(
     "/tickers/list",
     responses={
-        200: {"model": TickersListGet200Response, "description": "성공적으로 티커 목록을 조회했습니다."},
+        200: {"model": List[TickerOutput], "description": "성공적으로 티커 목록을 조회했습니다."},
     },
     tags=["Ticker Management"],
     summary="티커 목록 조회",
     response_model_by_alias=True,
 )
 async def tickers_list_get(
-) -> TickersListGet200Response:
+) -> List[TickerOutput]:
     """모든 티커 목록을 조회합니다."""
     if not BaseTickerManagementApi.subclasses:
         raise HTTPException(status_code=500, detail="Not implemented")

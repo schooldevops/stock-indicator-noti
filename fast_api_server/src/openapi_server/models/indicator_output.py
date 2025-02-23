@@ -21,7 +21,7 @@ import json
 
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 try:
     from typing import Self
@@ -32,12 +32,13 @@ class IndicatorOutput(BaseModel):
     """
     IndicatorOutput
     """ # noqa: E501
+    indicator_id: Optional[StrictInt] = Field(default=None, alias="indicatorId")
     indicator_name: Optional[StrictStr] = Field(default=None, alias="indicatorName")
     indicator_code: Optional[StrictStr] = Field(default=None, alias="indicatorCode")
     description: Optional[StrictStr] = None
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     modified_at: Optional[datetime] = Field(default=None, alias="modifiedAt")
-    __properties: ClassVar[List[str]] = ["indicatorName", "indicatorCode", "description", "createdAt", "modifiedAt"]
+    __properties: ClassVar[List[str]] = ["indicatorId", "indicatorName", "indicatorCode", "description", "createdAt", "modifiedAt"]
 
     model_config = {
         "populate_by_name": True,
@@ -88,6 +89,7 @@ class IndicatorOutput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "indicatorId": obj.get("indicatorId"),
             "indicatorName": obj.get("indicatorName"),
             "indicatorCode": obj.get("indicatorCode"),
             "description": obj.get("description"),
